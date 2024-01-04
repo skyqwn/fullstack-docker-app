@@ -1,32 +1,32 @@
 version: "3"
 services:
   frontend:
-    image: johnahn/docker-frontend
+    image: keemba/docker-frontend
     volumes:
       - /app/node_modules
       - ./frontend:/app
     stdin_open: true
     mem_limit: 128m
 
-  nginx: 
+  nginx:
     restart: always
-    image: johnahn/docker-nginx
-    ports: 
+    image: keemba/docker-nginx
+    ports:
       - "80:80"
 
   backend:
-    image: johnahn/docker-backend
+    image: keemba/docker-backend
     container_name: app_backend
     volumes:
       - /app/node_modules
       - ./backend:/app
     mem_limit: 128m
-    environment: 
-      MYSQL_HOST: $MYSQL_HOST 
-      MYSQL_USER: $MYSQL_USER 
+    environment:
+      MYSQL_HOST: $MYSQL_HOST
+      MYSQL_USER: $MYSQL_USER
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_PORT: $MYSQL_PORT   
+      MYSQL_PORT: $MYSQL_PORT
 
   # mysql:
   #   build: ./mysql
@@ -38,5 +38,5 @@ services:
   #     - ./mysql/mysql_data:/var/lib/mysql
   #     - ./mysql/sqls/:/docker-entrypoint-initdb.d/
   #   environment:
-  #     MYSQL_ROOT_PASSWORD: johnahn
+  #     MYSQL_ROOT_PASSWORD: keemba
   #     MYSQL_DATABASE: myapp
